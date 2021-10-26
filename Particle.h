@@ -22,8 +22,8 @@ class Particle
         // and the given value (default 0.0)
         Particle(int size, double value=0.0);
 
-        // Initialise with random values
-        Particle(int size, Tools::RNG& rng, bool restrict_to_positive=false);
+        // Initialise with all values
+        Particle(std::vector<double>&& _values);
 
         // Perturb one or more values
         void perturb(Tools::RNG& rng);

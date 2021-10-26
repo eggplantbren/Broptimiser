@@ -15,7 +15,7 @@ double trivial(const std::vector<double>& values)
 int main()
 {
     Tools::RNG rng;
-    Optimiser optimiser(trivial, Particle(10, rng));
+    Optimiser optimiser(trivial, Particle(10, 12.3));
 
     return 0;
 }

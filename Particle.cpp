@@ -12,15 +12,10 @@ Particle::Particle(int size, double value)
 
 }
 
-Particle::Particle(int size, Tools::RNG& rng, bool restrict_to_positive)
-:values(size)
+Particle::Particle(std::vector<double>&& _values)
+:values(_values)
 {
-    for(double& value: values)
-    {
-        value = unsquash(-500.0 + 1000.0*rng.rand());
-        if(restrict_to_positive)
-            value = std::abs(value);
-    }
+
 }
 
 void Particle::perturb(Tools::RNG& rng)
