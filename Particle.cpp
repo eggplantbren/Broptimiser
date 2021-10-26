@@ -1,5 +1,4 @@
 #include "Particle.h"
-#include "Squash.h"
 #include "Tools/Misc.hpp"
 
 namespace Broptimiser
@@ -13,9 +12,9 @@ Particle::Particle(int size, double value)
 }
 
 Particle::Particle(std::vector<double>&& _values)
-:values(_values)
 {
-
+    for(size_t i=0; i<_values.size(); ++i)
+        values.emplace_back(_values[i]);
 }
 
 void Particle::perturb(Tools::RNG& rng)
@@ -25,31 +24,31 @@ void Particle::perturb(Tools::RNG& rng)
         reps = int(pow(values.size(), rng.rand()));
 
     int k;
-    double s;
     for(int rep=0; rep<reps; ++rep)
     {
         k = rng.rand_int(values.size());
-        s = squash(values[k]);
-        s += 1000.0*rng.randh();
-        Tools::wrap(s, -500.0, 500.0);
-        values[k] = unsquash(s);
+        values[k].perturb(rng);
     }
 }
 
 // Print to output stream
 void Particle::print(std::ostream& out) const
 {
-    for(size_t i=0; i<values.size(); ++i)
+    auto xs = get_values();
+    for(size_t i=0; i<xs.size(); ++i)
     {
-        out << values[i];
-        if(i != values.size() - 1)
+        out << xs[i];
+        if(i != xs.size() - 1)
             out << ',';
     }
 }
 
-const std::vector<double>& Particle::get_values() const
+std::vector<double> Particle::get_values() const
 {
-    return values;
+    std::vector<double> result(values.size());
+    for(size_t i=0; i<values.size(); ++i)
+        result[i] = values[i].value();
+    return result;
 }
 
 

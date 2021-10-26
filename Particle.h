@@ -1,6 +1,7 @@
 #ifndef Broptimiser_Particle_h
 #define Broptimiser_Particle_h
 
+#include "Anything.h"
 #include "Tools/RNG.hpp"
 #include <ostream>
 #include <vector>
@@ -11,7 +12,7 @@ namespace Broptimiser
 class Particle
 {
     private:
-        std::vector<double> values;
+        std::vector<Anything> values;
 
     public:
 
@@ -32,7 +33,7 @@ class Particle
         void print(std::ostream& out) const;
 
         // Getter
-        const std::vector<double>& get_values() const;
+        std::vector<double> get_values() const;
 };
 
 
