@@ -2,6 +2,7 @@
 #define Broptimiser_Particle_h
 
 #include "Tools/RNG.hpp"
+#include <ostream>
 #include <vector>
 
 namespace Broptimiser
@@ -24,8 +25,16 @@ class Particle
         // Initialise with random values
         Particle(int size, Tools::RNG& rng, bool restrict_to_positive=false);
 
+        // Perturb one or more values
+        void perturb(Tools::RNG& rng);
+
+        // Print to output stream
+        void print(std::ostream& out) const;
 };
 
+
+// Print to output stream
+std::ostream& operator << (std::ostream& out, const Particle& particle);
 
 } // namespace
 
