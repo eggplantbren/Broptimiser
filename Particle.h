@@ -30,6 +30,9 @@ class Particle
 
         // Print to output stream
         void print(std::ostream& out) const;
+
+        // Getter
+        const std::vector<double>& get_values() const;
 };
 
 

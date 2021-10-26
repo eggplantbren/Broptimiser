@@ -1,7 +1,8 @@
 CXX = g++
-FLAGS = -O3 -march=native -std=c++20 -Wall -Wextra -pedantic
+FLAGS = -std=c++20 -O3 -march=native -Wall -Wextra -pedantic
 
 default:
+	$(CXX) $(FLAGS) -c Optimiser.cpp
 	$(CXX) $(FLAGS) -c Particle.cpp
 	$(CXX) $(FLAGS) -c Squash.cpp
 	ar rcs libBroptimiser.a *.o

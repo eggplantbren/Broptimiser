@@ -52,6 +52,12 @@ void Particle::print(std::ostream& out) const
     }
 }
 
+const std::vector<double>& Particle::get_values() const
+{
+    return values;
+}
+
+
 std::ostream& operator << (std::ostream& out, const Particle& particle)
 {
     particle.print(out);

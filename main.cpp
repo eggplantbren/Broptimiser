@@ -1,13 +1,21 @@
 #include <iostream>
-#include "Particle.h"
+#include "Optimiser.h"
 
 using namespace Broptimiser;
+
+
+double trivial(const std::vector<double>& values)
+{
+    double tot = 0.0;
+    for(double x: values)
+        tot += -0.5*x*x;
+    return tot;
+}
 
 int main()
 {
     Tools::RNG rng;
-    Particle p(10, rng);
-    std::cout << p << std::endl;
+    Optimiser optimiser(trivial, Particle(10, rng));
 
     return 0;
 }
