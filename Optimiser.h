@@ -4,6 +4,7 @@
 #include "Particle.h"
 #include <functional>
 #include <map>
+#include "sqlite_modern_cpp/hdr/sqlite_modern_cpp.h"
 #include <tuple>
 
 namespace Broptimiser
@@ -18,8 +19,7 @@ class Optimiser
         Function function;
         Particle particle;
         std::tuple<Particle, double> all_time_high;
-        std::multimap<double, double> f_to_target;
-        void scan(); // Compute target distribution values
+        sqlite::database memdb;
 
     public:
         Optimiser() = delete;

@@ -7,5 +7,5 @@ default:
 	$(CXX) $(FLAGS) -c Particle.cpp
 	ar rcs libBroptimiser.a *.o
 	$(CXX) $(FLAGS) -c main.cpp
-	$(CXX) -L . -o main main.o -lBroptimiser
+	$(CXX) -L . -o main main.o -lBroptimiser -lsqlite3
 	rm *.o
