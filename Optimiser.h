@@ -3,7 +3,8 @@
 
 #include "Particle.h"
 #include <functional>
-#include <set>
+#include <map>
+#include <tuple>
 
 namespace Broptimiser
 {
@@ -16,8 +17,9 @@ class Optimiser
 
         Function function;
         Particle particle;
-        Particle best;
-        std::multiset<double> function_evaluations;
+        std::tuple<Particle, double> all_time_high;
+        std::multimap<double, double> f_to_target;
+        void scan(); // Compute target distribution values
 
     public:
         Optimiser() = delete;
