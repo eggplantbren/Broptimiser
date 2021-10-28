@@ -16,6 +16,7 @@ int main()
 {
     Tools::RNG rng;
     Optimiser optimiser(trivial, Particle(10, 12.3));
+    optimiser.explore(rng);
 
     return 0;
 }

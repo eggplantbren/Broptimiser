@@ -18,14 +18,20 @@ class Optimiser
 
         Function function;
         Particle particle;
+        double f, q;
         std::tuple<Particle, double> all_time_high;
         sqlite::database memdb;
+        double evaluate_quality(double _f);
+        void insert_point();
 
     public:
         Optimiser() = delete;
 
         // You have to pass sensible initial conditions
         Optimiser(Function&& _function, Particle&& _particle);
+
+        // Explore for a while
+        void explore(Tools::RNG& rng, int steps=1000);
 };
 
 } // namespace
