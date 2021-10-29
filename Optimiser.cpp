@@ -48,7 +48,6 @@ void Optimiser::explore(Tools::RNG& rng, int steps)
         proposal.perturb(rng);
         double f_prop = function(proposal.get_values());
         double q_prop = evaluate_quality(f_prop);
-        std::cout << f << ' ' << f_prop << std::endl;
         if(rng.rand() <= exp(q_prop - q))
         {
             particle = proposal;
@@ -60,8 +59,11 @@ void Optimiser::explore(Tools::RNG& rng, int steps)
         if(f > std::get<1>(all_time_high))
             all_time_high = {particle, f};
     }
+    insert_point();
     std::cout << "done. ";
     std::cout << "Acceptance rate = " << accepted << '/' << steps << '.';
+    std::cout << std::endl;
+    std::cout << "All time high = " << std::get<1>(all_time_high) << '.';
     std::cout << std::endl;
 }
 
