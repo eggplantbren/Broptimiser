@@ -32,6 +32,9 @@ class Optimiser
 
         // Explore for a while
         void explore(Tools::RNG& rng, int steps=1000);
+
+        // Get best parameters
+        std::vector<double> get_best_params() const;
 };
 
 } // namespace

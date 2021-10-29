@@ -1,5 +1,6 @@
 #include "Optimiser.h"
 #include <iostream>
+#include <fstream>
 #include "sqlite_modern_cpp/hdr/sqlite_modern_cpp.h"
 
 namespace Broptimiser
@@ -35,12 +36,14 @@ double Optimiser::evaluate_quality(double _f)
     int count;
     memdb << "SELECT COUNT(id) FROM points WHERE f >= ?;"
           << _f >> count;
-    return -log(1.0 + pow(count, 2));
+    return -count/5.0;
 }
 
 void Optimiser::explore(Tools::RNG& rng, int steps)
 {
     std::cout << "Exploring..." << std::flush;
+
+//    static std::fstream fout("output.txt", std::ios::out);
     int accepted = 0;
     for(int i=0; i<steps; ++i)
     {
@@ -58,6 +61,8 @@ void Optimiser::explore(Tools::RNG& rng, int steps)
 
         if(f > std::get<1>(all_time_high))
             all_time_high = {particle, f};
+
+//        fout << f << std::endl;
     }
     insert_point();
     std::cout << "done. ";
@@ -66,5 +71,12 @@ void Optimiser::explore(Tools::RNG& rng, int steps)
     std::cout << "All time high = " << std::get<1>(all_time_high) << '.';
     std::cout << std::endl;
 }
+
+
+std::vector<double> Optimiser::get_best_params() const
+{
+    return std::get<0>(all_time_high).get_values();
+}
+
 
 } // namespace
